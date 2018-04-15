@@ -20,17 +20,31 @@ service: IDontLikeWorkGoogleAssistant # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
+  memorySize: 512
+  timeout: 120
+  versionFunctions: false
+  onError: "arn:aws:sns:ap-south-1:591882575573:idontlikework"
 
 # you can overwrite defaults here
   stage: production
   region: ap-south-1
+  apiKeys:
+    - ${env:NODE_ENV, "dev"}-access_key-ga
 
 functions:
   app:
     handler: index.handler
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+        - http: 
+            path: /
+            method: ANY
+            private: true
+            cors: true
+        - http:
+            path: "{proxy+}"
+            method: ANY
+            private: true
+            cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

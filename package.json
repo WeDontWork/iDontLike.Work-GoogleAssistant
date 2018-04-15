@@ -7,12 +7,10 @@
   "scripts": {
     "deploy": "NODE_ENV=production ./deploy.sh"
   },
-  "devDependencies": {
-    "request": "2.85.0",
-    "request-promise": "4.2.2"
-  },
   "dependencies": {
     "express": "^4.16.3",
-    "serverless-http": "^1.5.5"
+    "serverless-http": "^1.5.5",
+    "request": "2.85.0",
+    "request-promise": "4.2.2"
   }
 }
